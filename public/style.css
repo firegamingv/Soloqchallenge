@@ -1,0 +1,123 @@
+/* Global styles */
+body {
+    font-family: 'Orbitron', sans-serif;  /* Futuristic font family */
+    background-color: #0e0b16;            /* Dark background */
+    color: #f8f8ff;                       /* Light text color */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+h1 {
+    color: #ffd700; /* Gold color for title */
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 3rem;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+}
+
+/* Container for leaderboard */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+    box-shadow: 0 0 20px #000;            /* Glowing shadow */
+    border-radius: 10px;
+    border: 2px solid #ffd700;            /* Gold border */
+    animation: glow 2s ease-in-out infinite alternate; /* Glowing effect */
+}
+
+/* Glowing animation */
+@keyframes glow {
+    from {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.5), 0 0 30px rgba(255, 215, 0, 0.3);
+    }
+    to {
+        box-shadow: 0 0 40px rgba(255, 215, 0, 0.8), 0 0 50px rgba(255, 215, 0, 0.6);
+    }
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #151026; /* Dark purple background for table */
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ffd700; /* Gold border for cells */
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+th {
+    background-color: #1f1b2e; /* Darker purple for headers */
+    color: #ffd700;            /* Gold text color */
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+td {
+    color: #f8f8ff;
+}
+
+tr:nth-child(even) {
+    background-color: #1a1423;
+}
+
+tr:nth-child(odd) {
+    background-color: #100c18;
+}
+
+tr:hover {
+    background-color: #29213d;  /* Highlighted row on hover */
+    cursor: pointer;
+    transform: scale(1.02);     /* Slight zoom effect */
+}
+
+/* Button styles */
+button {
+    background-color: #ffd700; /* Gold button */
+    color: #0e0b16;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #ffae00; /* Darker gold on hover */
+    transform: scale(1.1);     /* Zoom effect */
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #151026; /* Dark background */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ffd700; /* Gold scrollbar */
+    border-radius: 6px;
+    border: 3px solid #151026; /* Padding between thumb and track */
+}
+
+tr:active {
+    background-color: #ffd700;  /* Change le fond en doré lors du clic */
+    color: #0e0b16;             /* Change le texte en noir pour contraste */
+    transform: scale(1.05);     /* Accentue légèrement le zoom */
+}
