@@ -15,6 +15,7 @@ mongoose.connect('mongodb://localhost:27017/leaderboard')
     .catch(err => console.error('MongoDB connection error:', err));
 
 // Serve static files from the "public" directory
+// Place your `index.html`, `styles.css`, etc. in the "public" folder
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Summoner schema
@@ -51,9 +52,9 @@ try {
     summonersData = [];
 }
 
-// API key
+// API key and region
 const API_KEY = process.env.RIOT_API_KEY;
-const REGION = 'euw1';  // Change to your desired region
+const REGION = 'euw1';
 
 // Fetch detailed ELO data for a summoner
 async function fetchElo(encryptedSummonerId) {
@@ -74,10 +75,9 @@ async function fetchElo(encryptedSummonerId) {
                 hotStreak: rankedData.hotStreak
             };
         }
-
         return null;
     } catch (error) {
-        console.error(`Error fetching ELO for summoner ${encryptedSummonerId}:`, error.response ? error.response.data : error.message);
+        console.error(`Error fetching ELO for summoner ${encryptedSummonerId}:`, error.message);
         return null;
     }
 }
@@ -88,59 +88,38 @@ async function fetchMatchHistory(puuid) {
         const response = await axios.get(`https://${REGION}.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=5&api_key=${API_KEY}`);
         return response.data;
     } catch (error) {
-        console.error(`Error fetching match history for summoner ${puuid}:`, error.response ? error.response.data : error.message);
+        console.error(`Error fetching match history for summoner ${puuid}:`, error.message);
         return [];
     }
 }
 
-// Function to update ELO and match history for a summoner
-async function updateSummonerData(summoner) {
+// Update ELO and match history for all summoners in parallel
+async function updateSummonersData() {
     try {
-        const eloData = await fetchElo(summoner.encryptedSummonerId);
-        const matchHistory = await fetchMatchHistory(summoner.puuid);
+        const updatePromises = summonersData.map(async (summoner) => {
+            const eloData = await fetchElo(summoner.encryptedSummonerId);
+            const matchHistory = await fetchMatchHistory(summoner.puuid);
 
-        if (eloData) {
-            // Update only if data has changed
-            summoner.leagueId = eloData.leagueId;
-            summoner.queueType = eloData.queueType;
-            summoner.tier = eloData.tier;
-            summoner.rank = eloData.rank;
-            summoner.leaguePoints = eloData.leaguePoints;
-            summoner.wins = eloData.wins;
-            summoner.losses = eloData.losses;
-            summoner.hotStreak = eloData.hotStreak;
-        }
+            if (eloData) {
+                Object.assign(summoner, eloData);  // Merge new ELO data into the summoner object
+            }
 
-        if (JSON.stringify(summoner.matchHistory) !== JSON.stringify(matchHistory)) {
-            summoner.matchHistory = matchHistory;
-        }
-        return true;
+            if (JSON.stringify(summoner.matchHistory) !== JSON.stringify(matchHistory)) {
+                summoner.matchHistory = matchHistory;
+            }
+        });
+
+        await Promise.all(updatePromises);  // Run all updates in parallel
+        fs.writeFileSync('summoners.json', JSON.stringify(summonersData, null, 2));  // Save updates to file
+        console.log('Summoner data updated.');
     } catch (error) {
-        console.error(`Error updating summoner data for ${summoner.name}`, error);
-        return false;
+        console.error('Error updating summoners data:', error.message);
     }
 }
 
 // Leaderboard route
-// Leaderboard route
 app.get('/leaderboard', async (req, res) => {
     try {
-        let dataUpdated = false;
-
-        // Check for updates in ELO or match history for each summoner
-        for (let summoner of summonersData) {
-            const hasUpdated = await updateSummonerData(summoner);
-            if (hasUpdated) {
-                dataUpdated = true;
-            }
-        }
-
-        // If any data has been updated, write back to the JSON file
-        if (dataUpdated) {
-            fs.writeFileSync('summoners.json', JSON.stringify(summonersData, null, 2));
-            console.log('Summoner data updated.');
-        }
-
         // Define base points for each tier
         const tierPoints = {
             "Iron": 0,
@@ -154,13 +133,11 @@ app.get('/leaderboard', async (req, res) => {
             "Challenger": 800
         };
 
-        // Sort summoners by combined tier points and league points
+        // Sort summoners by combined tier points and league points in descending order
         const sortedSummoners = summonersData.sort((a, b) => {
-            // Calculate the total score for each summoner
             const aScore = (tierPoints[a.tier] || 0) + a.leaguePoints;
             const bScore = (tierPoints[b.tier] || 0) + b.leaguePoints;
-
-            return bScore - aScore; // Sort in descending order
+            return bScore - aScore;  // Descending order
         });
 
         res.json(sortedSummoners);
@@ -169,7 +146,11 @@ app.get('/leaderboard', async (req, res) => {
     }
 });
 
-
+// Update data every hour using cron job
+cron.schedule('0 * * * *', () => {
+    console.log('Updating summoner data...');
+    updateSummonersData();
+});
 
 // Start server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
