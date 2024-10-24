@@ -1,0 +1,55 @@
+{
+  "name": "0lope",
+  "tagline": "2588",
+  "puuid": "Fwaq3AKlpA-q52UduXwD69W3TvAxxEEqSJx_IBuy5lQendnMRSaXKBU9PrU3QJCdhmiF090lok3UTg",
+  "encryptedAccountId": "_TL9u0kBmgdhqWpNjmMJtsYeFj9PU8cwXTG--XbLH86kWDXsr754V9Kf",
+  "encryptedSummonerId": "d2C24qVgZLN7GqVD5jf4OrFFTayM24XEa1i85FASEemQWX6q_ycTb9FKOQ",
+  "elo": "SILVER IV",
+  "matchHistory": [
+    {
+      "matchId": "EUW1_7163110639",
+      "win": true,
+      "kills": 7,
+      "deaths": 1,
+      "championName": "Jhin"
+    },
+    {
+      "matchId": "EUW1_7163047399",
+      "win": false,
+      "kills": 8,
+      "deaths": 9,
+      "championName": "JarvanIV"
+    },
+    {
+      "matchId": "EUW1_7162900357",
+      "win": false,
+      "kills": 5,
+      "deaths": 13,
+      "championName": "Brand"
+    },
+    {
+      "matchId": "EUW1_7162146578",
+      "win": false,
+      "kills": 20,
+      "deaths": 18,
+      "championName": "Soraka"
+    },
+    {
+      "matchId": "EUW1_7162122566",
+      "win": true,
+      "kills": 7,
+      "deaths": 7,
+      "championName": "Ryze"
+    }
+  ],
+  "leagueId": "5697d7ed-2543-46f9-8086-9860cb4da314",
+  "queueType": "RANKED_SOLO_5x5",
+  "tier": "SILVER",
+  "rank": "IV",
+  "leaguePoints": 99,
+  "wins": 28,
+  "losses": 20,
+  "hotStreak": false,
+  "winrate": "40.00%",
+  "summonerId": "d2C24qVgZLN7GqVD5jf4OrFFTayM24XEa1i85FASEemQWX6q_ycTb9FKOQ"
+}

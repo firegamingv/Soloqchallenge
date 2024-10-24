@@ -1,4 +1,3 @@
-/* Global styles */
 body {
     font-family: 'Orbitron', sans-serif;  /* Futuristic font family */
     background-color: #0e0b16;            /* Dark background */
@@ -83,41 +82,44 @@ tr:hover {
     transform: scale(1.02);     /* Slight zoom effect */
 }
 
-/* Button styles */
-button {
-    background-color: #ffd700; /* Gold button */
-    color: #0e0b16;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
+/* Popup Styles */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100; /* Ensure the overlay and popup appear on top */
+}
+
+.popup {
+    background-color: #151026;
+    padding: 30px;
+    width: 400px;
+    border-radius: 10px;
+    border: 2px solid #ffd700;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+    display: none;
+    z-index: 101; /* Ensure the popup is on top of the overlay */
+}
+
+.popup h2 {
+    color: #ffd700;
+    margin-bottom: 20px;
+}
+
+.popup p {
+    color: white;
+    margin: 10px 0;
+}
+
+.close-popup {
+    color: #ffd700;
+    font-size: 1.5rem;
+    float: right;
     cursor: pointer;
-    font-size: 1rem;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-button:hover {
-    background-color: #ffae00; /* Darker gold on hover */
-    transform: scale(1.1);     /* Zoom effect */
-}
-
-/* Scrollbar styles */
-::-webkit-scrollbar {
-    width: 12px;
-}
-
-::-webkit-scrollbar-track {
-    background: #151026; /* Dark background */
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: #ffd700; /* Gold scrollbar */
-    border-radius: 6px;
-    border: 3px solid #151026; /* Padding between thumb and track */
-}
-
-tr:active {
-    background-color: #ffd700;  /* Change le fond en doré lors du clic */
-    color: #0e0b16;             /* Change le texte en noir pour contraste */
-    transform: scale(1.05);     /* Accentue légèrement le zoom */
 }

@@ -1,0 +1,55 @@
+{
+  "name": "Tom Sawyerr",
+  "tagline": "euw",
+  "puuid": "LmeHBa4vFFu5qH_hMoyAfrRQBvzcCICqM63kBIEY5pTFov_1vetPNJvc_p04X4Po0giZSYfObPcX2w",
+  "encryptedAccountId": "XLh97slWSNzonvcyt7ENqXcKpR6sIqslKcPNhBM_bD_0fBmgXhudOtlW ",
+  "encryptedSummonerId": "5Cjh9fhC4db18LCRpMfklfEdoNNKzjVsbVbeZK4CRch5kTD9_x6UN0rmzQ",
+  "elo": "SILVER IV",
+  "matchHistory": [
+    {
+      "matchId": "EUW1_7161159936",
+      "win": false,
+      "kills": 5,
+      "deaths": 5,
+      "championName": "Darius"
+    },
+    {
+      "matchId": "EUW1_7160836862",
+      "win": false,
+      "kills": 6,
+      "deaths": 7,
+      "championName": "Akali"
+    },
+    {
+      "matchId": "EUW1_7159942272",
+      "win": false,
+      "kills": 7,
+      "deaths": 6,
+      "championName": "Akali"
+    },
+    {
+      "matchId": "EUW1_7158643225",
+      "win": false,
+      "kills": 5,
+      "deaths": 4,
+      "championName": "Mordekaiser"
+    },
+    {
+      "matchId": "EUW1_7158561981",
+      "win": false,
+      "kills": 2,
+      "deaths": 2,
+      "championName": "KSante"
+    }
+  ],
+  "leagueId": "b0d528b1-6b1a-4ee4-9c58-14a407548cb6",
+  "queueType": "RANKED_SOLO_5x5",
+  "tier": "SILVER",
+  "rank": "IV",
+  "leaguePoints": 0,
+  "wins": 11,
+  "losses": 28,
+  "hotStreak": false,
+  "winrate": "0.00%",
+  "summonerId": "5Cjh9fhC4db18LCRpMfklfEdoNNKzjVsbVbeZK4CRch5kTD9_x6UN0rmzQ"
+}

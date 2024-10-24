@@ -1,0 +1,46 @@
+{
+  "name": "yla",
+  "tagline": "kaka",
+  "puuid": "JpiMpHpsR0ecNzKylXHjKEj0DTN62oKx6gBvM5wzh_-4kf9m6wXEq3JQ3EPoN7BkAcfwOSLwkIJB6w",
+  "encryptedAccountId": "sreeOvrTBKIDqYXtT1CzxLMxTC-uWoXH3XiHpVysAoii--5JJnnnO3H-",
+  "encryptedSummonerId": "Qebr92vqtYeEUJg63sBfFk2ukogxQSlSMpsQciykqUxjYRSY_XHO1ydXbg",
+  "elo": "Unranked",
+  "matchHistory": [
+    {
+      "matchId": "EUW1_7163100232",
+      "win": true,
+      "kills": 1,
+      "deaths": 6,
+      "championName": "Ashe"
+    },
+    {
+      "matchId": "EUW1_7162900357",
+      "win": false,
+      "kills": 6,
+      "deaths": 13,
+      "championName": "Katarina"
+    },
+    {
+      "matchId": "EUW1_7162845849",
+      "win": true,
+      "kills": 1,
+      "deaths": 5,
+      "championName": "Leona"
+    },
+    {
+      "matchId": "EUW1_7160304454",
+      "win": false,
+      "kills": 10,
+      "deaths": 13,
+      "championName": "Lux"
+    },
+    {
+      "matchId": "EUW1_7158643225",
+      "win": false,
+      "kills": 0,
+      "deaths": 9,
+      "championName": "Ashe"
+    }
+  ],
+  "winrate": "40.00%"
+}

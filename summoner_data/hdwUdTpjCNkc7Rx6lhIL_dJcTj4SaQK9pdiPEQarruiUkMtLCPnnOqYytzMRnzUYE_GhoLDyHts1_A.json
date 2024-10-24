@@ -1,0 +1,46 @@
+{
+  "name": "Artifroa",
+  "tagline": "KAKA",
+  "puuid": "hdwUdTpjCNkc7Rx6lhIL_dJcTj4SaQK9pdiPEQarruiUkMtLCPnnOqYytzMRnzUYE_GhoLDyHts1_A",
+  "encryptedAccountId": "8hSuV44e18YGoJ-rVhv64NvkhF_tpz3Q2Bp8znP8GP1AD3Yp97wG5nXh",
+  "encryptedSummonerId": "WbStHmfmjIxHU2E7kpFAzckW0Yjutt7c2srV79vDEYcVne0t",
+  "elo": "Unranked",
+  "matchHistory": [
+    {
+      "matchId": "EUW1_7162146578",
+      "win": false,
+      "kills": 23,
+      "deaths": 18,
+      "championName": "Xerath"
+    },
+    {
+      "matchId": "EUW1_7162122566",
+      "win": true,
+      "kills": 13,
+      "deaths": 8,
+      "championName": "Lux"
+    },
+    {
+      "matchId": "EUW1_7161646655",
+      "win": false,
+      "kills": 3,
+      "deaths": 8,
+      "championName": "Varus"
+    },
+    {
+      "matchId": "EUW1_7158643225",
+      "win": false,
+      "kills": 3,
+      "deaths": 8,
+      "championName": "Varus"
+    },
+    {
+      "matchId": "EUW1_7158561981",
+      "win": false,
+      "kills": 6,
+      "deaths": 4,
+      "championName": "Jinx"
+    }
+  ],
+  "winrate": "20.00%"
+}

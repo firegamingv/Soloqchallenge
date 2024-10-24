@@ -1,0 +1,55 @@
+{
+  "name": "Kidotsai",
+  "tagline": "EUW",
+  "puuid": "Q15I1qwDpu_O70ukQg5olulvgeay6UYmQdW0O2rN9xznmZ8mtb7f67lzA0U6Y08HP6LGfeDUcpyc7g",
+  "encryptedAccountId": "OO170OS9tK2mnvelS60OEZW4ymZSjwH_CWhfeWM-1aBNanInMJ9hBLDc",
+  "encryptedSummonerId": "bVD581DOfayuT3Ebvpm7CyGjOVpubvQTTUC8OGjR71nMaj31",
+  "elo": "BRONZE I",
+  "matchHistory": [
+    {
+      "matchId": "EUW1_7163110639",
+      "win": true,
+      "kills": 1,
+      "deaths": 0,
+      "championName": "Morgana"
+    },
+    {
+      "matchId": "EUW1_7162884871",
+      "win": false,
+      "kills": 2,
+      "deaths": 5,
+      "championName": "Chogath"
+    },
+    {
+      "matchId": "EUW1_7162792022",
+      "win": false,
+      "kills": 2,
+      "deaths": 6,
+      "championName": "Aurora"
+    },
+    {
+      "matchId": "EUW1_7162146578",
+      "win": false,
+      "kills": 23,
+      "deaths": 19,
+      "championName": "Thresh"
+    },
+    {
+      "matchId": "EUW1_7162122566",
+      "win": true,
+      "kills": 20,
+      "deaths": 11,
+      "championName": "Shaco"
+    }
+  ],
+  "leagueId": "1daf1e83-4306-4be7-a9e7-9b4d3d027a70",
+  "queueType": "RANKED_SOLO_5x5",
+  "tier": "BRONZE",
+  "rank": "I",
+  "leaguePoints": 44,
+  "wins": 3,
+  "losses": 5,
+  "hotStreak": false,
+  "winrate": "40.00%",
+  "summonerId": "bVD581DOfayuT3Ebvpm7CyGjOVpubvQTTUC8OGjR71nMaj31"
+}

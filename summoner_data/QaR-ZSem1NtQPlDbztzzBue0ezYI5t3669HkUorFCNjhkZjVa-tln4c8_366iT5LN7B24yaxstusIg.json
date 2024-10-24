@@ -1,0 +1,55 @@
+{
+  "name": "the ruined one",
+  "tagline": "5408",
+  "puuid": "QaR-ZSem1NtQPlDbztzzBue0ezYI5t3669HkUorFCNjhkZjVa-tln4c8_366iT5LN7B24yaxstusIg",
+  "encryptedAccountId": "sl5aIZapgaCaK4Y0Imh-B-A8reZo5IPrlr7rmrZM8BdxDqtWmnoYjzhm",
+  "encryptedSummonerId": "hzZD_bU_1QLr5N5WGVguDGwas5Gwsu8JPYp9xAPvm-Rp3HlZzCrtI3U1pQ",
+  "elo": "SILVER II",
+  "matchHistory": [
+    {
+      "matchId": "EUW1_7163110639",
+      "win": true,
+      "kills": 8,
+      "deaths": 0,
+      "championName": "Kayn"
+    },
+    {
+      "matchId": "EUW1_7162884871",
+      "win": false,
+      "kills": 2,
+      "deaths": 9,
+      "championName": "Yone"
+    },
+    {
+      "matchId": "EUW1_7162792022",
+      "win": false,
+      "kills": 6,
+      "deaths": 15,
+      "championName": "Katarina"
+    },
+    {
+      "matchId": "EUW1_7161646655",
+      "win": false,
+      "kills": 0,
+      "deaths": 10,
+      "championName": "Nautilus"
+    },
+    {
+      "matchId": "EUW1_7160304454",
+      "win": false,
+      "kills": 6,
+      "deaths": 9,
+      "championName": "Neeko"
+    }
+  ],
+  "leagueId": "e7fc8fd9-05d1-4d9e-af60-c8e39886cd44",
+  "queueType": "RANKED_SOLO_5x5",
+  "tier": "SILVER",
+  "rank": "III",
+  "leaguePoints": 67,
+  "wins": 16,
+  "losses": 14,
+  "hotStreak": false,
+  "winrate": "20.00%",
+  "summonerId": "hzZD_bU_1QLr5N5WGVguDGwas5Gwsu8JPYp9xAPvm-Rp3HlZzCrtI3U1pQ"
+}

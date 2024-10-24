@@ -1,0 +1,55 @@
+{
+  "name": "CRISMONNOM",
+  "tagline": "0001",
+  "puuid": "1xjTTDZuc83J8YAGRZqSVeQ4KtWL445EvB1sXjQd8CM6I3uHDwgSy9AAd5R72QsQodrA3dmZhcn-AA",
+  "encryptedAccountId": "iWkqUQ1WHV5Q6ZiRceqIx6Zk0F_9pcy0IOJ9VD-v8RmsiqDgfPCyfkjY",
+  "encryptedSummonerId": "bJHIke6Tt8AoFcBpCyRrGUvHtrEo5Na7bY3YGpXkmR407Fym",
+  "elo": "PLATINUM II",
+  "matchHistory": [
+    {
+      "matchId": "EUW1_7159452866",
+      "win": false,
+      "kills": 2,
+      "deaths": 7,
+      "championName": "Teemo"
+    },
+    {
+      "matchId": "EUW1_7158333729",
+      "win": false,
+      "kills": 7,
+      "deaths": 7,
+      "championName": "Lillia"
+    },
+    {
+      "matchId": "EUW1_7158284281",
+      "win": false,
+      "kills": 2,
+      "deaths": 7,
+      "championName": "Lillia"
+    },
+    {
+      "matchId": "EUW1_7157907238",
+      "win": false,
+      "kills": 10,
+      "deaths": 4,
+      "championName": "Lillia"
+    },
+    {
+      "matchId": "EUW1_7157433086",
+      "win": true,
+      "kills": 9,
+      "deaths": 3,
+      "championName": "Lillia"
+    }
+  ],
+  "leagueId": "d840de42-1eee-4745-8946-28aa2787b628",
+  "queueType": "RANKED_SOLO_5x5",
+  "tier": "PLATINUM",
+  "rank": "II",
+  "leaguePoints": 61,
+  "wins": 67,
+  "losses": 80,
+  "hotStreak": false,
+  "winrate": "20.00%",
+  "summonerId": "bJHIke6Tt8AoFcBpCyRrGUvHtrEo5Na7bY3YGpXkmR407Fym"
+}

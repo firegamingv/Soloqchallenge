@@ -1,0 +1,55 @@
+{
+  "name": "coward swallower",
+  "tagline": "euw12",
+  "puuid": "dHeq_Tiee8NEcI_GIYrOg9U93W5cxMQY3ETUsRBGP2EZmQ_Z4OtOFyCPmIJdEnt_yoK5o1etfIcPHg",
+  "encryptedAccountId": "AXbIpCJdufB7h_gNKRuTlutov0TeDLvI0lk6LErue3_bKB7wSXYlsBYV",
+  "encryptedSummonerId": "lTN_70DyTEa-fk6cKrk7UOq3iWfqKERXg_hMRwMm1xGeBAeJ",
+  "elo": "PLATINUM III",
+  "matchHistory": [
+    {
+      "matchId": "EUW1_7162583513",
+      "win": true,
+      "kills": 10,
+      "deaths": 4,
+      "championName": "Kaisa"
+    },
+    {
+      "matchId": "EUW1_7162146578",
+      "win": false,
+      "kills": 13,
+      "deaths": 22,
+      "championName": "Braum"
+    },
+    {
+      "matchId": "EUW1_7162122566",
+      "win": true,
+      "kills": 21,
+      "deaths": 12,
+      "championName": "Vayne"
+    },
+    {
+      "matchId": "EUW1_7160304454",
+      "win": false,
+      "kills": 4,
+      "deaths": 7,
+      "championName": "Aatrox"
+    },
+    {
+      "matchId": "EUW1_7158264631",
+      "win": false,
+      "kills": 13,
+      "deaths": 12,
+      "championName": "Yasuo"
+    }
+  ],
+  "leagueId": "3b10b262-b21f-480a-bcf6-718e200a1223",
+  "queueType": "RANKED_SOLO_5x5",
+  "tier": "PLATINUM",
+  "rank": "III",
+  "leaguePoints": 42,
+  "wins": 28,
+  "losses": 22,
+  "hotStreak": false,
+  "winrate": "40.00%",
+  "summonerId": "lTN_70DyTEa-fk6cKrk7UOq3iWfqKERXg_hMRwMm1xGeBAeJ"
+}

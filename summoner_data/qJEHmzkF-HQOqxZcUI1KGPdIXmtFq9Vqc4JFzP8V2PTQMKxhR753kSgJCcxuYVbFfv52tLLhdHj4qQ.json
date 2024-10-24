@@ -1,0 +1,55 @@
+{
+  "name": "Zak",
+  "tagline": "CACA",
+  "puuid": "qJEHmzkF-HQOqxZcUI1KGPdIXmtFq9Vqc4JFzP8V2PTQMKxhR753kSgJCcxuYVbFfv52tLLhdHj4qQ",
+  "encryptedAccountId": "hzVmlRqFRO1tk9Ydg-PqcCek-MCUeU9zwgquYXHK3mA3R9tPCAe53KCS",
+  "encryptedSummonerId": "RmhFnmMEn-Wnwv7uAKPXcUfuG524NPcTe3Fg0Ju9BT-3k0hxGb8zkPHyRg",
+  "elo": "Unranked",
+  "matchHistory": [
+    {
+      "matchId": "EUW1_7163124523",
+      "win": false,
+      "kills": 1,
+      "deaths": 4,
+      "championName": "Viego"
+    },
+    {
+      "matchId": "EUW1_7163087033",
+      "win": false,
+      "kills": 4,
+      "deaths": 4,
+      "championName": "Kayn"
+    },
+    {
+      "matchId": "EUW1_7163053529",
+      "win": false,
+      "kills": 5,
+      "deaths": 4,
+      "championName": "Tristana"
+    },
+    {
+      "matchId": "EUW1_7162968025",
+      "win": true,
+      "kills": 11,
+      "deaths": 9,
+      "championName": "Caitlyn"
+    },
+    {
+      "matchId": "EUW1_7162887725",
+      "win": false,
+      "kills": 6,
+      "deaths": 11,
+      "championName": "Caitlyn"
+    }
+  ],
+  "winrate": "20.00%",
+  "leagueId": "34eeab00-af9b-4ae6-a65e-5ac3457b741e",
+  "summonerId": "RmhFnmMEn-Wnwv7uAKPXcUfuG524NPcTe3Fg0Ju9BT-3k0hxGb8zkPHyRg",
+  "queueType": "RANKED_SOLO_5x5",
+  "tier": "BRONZE",
+  "rank": "I",
+  "leaguePoints": 36,
+  "wins": 2,
+  "losses": 3,
+  "hotStreak": false
+}

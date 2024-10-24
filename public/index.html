@@ -4,132 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leaderboard</title>
-   <style>
-       /* Global styles */
-       body {
-           font-family: 'Orbitron', sans-serif;  /* Futuristic font family */
-           background-color: #0e0b16;            /* Dark background */
-           color: #f8f8ff;                       /* Light text color */
-           margin: 0;
-           padding: 0;
-           display: flex;
-           justify-content: center;
-           align-items: center;
-           height: 100vh;
-           overflow: hidden;
-       }
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Styles pour le panneau flottant */
+        .details-panel {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            width: 300px;
+            padding: 20px;
+            background-color: #1f1b2e;
+            color: white;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            display: none;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
 
-       h1 {
-           color: #ffd700; /* Gold color for title */
-           text-align: center;
-           margin-bottom: 30px;
-           font-size: 3rem;
-           text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
-       }
+        .details-panel h2 {
+            margin-top: 0;
+            color: #ffd700;
+        }
 
-       /* Container for leaderboard */
-       .container {
-           width: 90%;
-           max-width: 1200px;
-           padding: 20px;
-           background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
-           box-shadow: 0 0 20px #000;            /* Glowing shadow */
-           border-radius: 10px;
-           border: 2px solid #ffd700;            /* Gold border */
-           animation: glow 2s ease-in-out infinite alternate; /* Glowing effect */
-       }
+        .details-panel p {
+            margin: 10px 0;
+        }
 
-       /* Glowing animation */
-       @keyframes glow {
-           from {
-               box-shadow: 0 0 20px rgba(255, 215, 0, 0.5), 0 0 30px rgba(255, 215, 0, 0.3);
-           }
-           to {
-               box-shadow: 0 0 40px rgba(255, 215, 0, 0.8), 0 0 50px rgba(255, 215, 0, 0.6);
-           }
-       }
+        .close-panel {
+            cursor: pointer;
+            color: #ffd700;
+            float: right;
+            font-size: 1.5rem;
+        }
 
-       /* Table styles */
-       table {
-           width: 100%;
-           border-collapse: collapse;
-           background-color: #151026; /* Dark purple background for table */
-       }
+        .details-panel.active {
+            display: block;
+        }
 
-       th, td {
-           padding: 15px;
-           text-align: center;
-           border: 1px solid #ffd700; /* Gold border for cells */
-           font-size: 1.1rem;
-           transition: all 0.3s ease;
-       }
+        /* Styles pour les carrés de victoire et de défaite */
+        .match-history {
+            display: flex;
+            justify-content: center;
+        }
 
-       th {
-           background-color: #1f1b2e; /* Darker purple for headers */
-           color: #ffd700;            /* Gold text color */
-           font-weight: bold;
-           text-transform: uppercase;
-           letter-spacing: 2px;
-       }
+        .match-history div {
+            width: 20px;
+            height: 20px;
+            margin: 0 3px;
+            border-radius: 3px;
+        }
 
-       td {
-           color: #f8f8ff;
-       }
+        .win {
+            background-color: #3498db; /* Bleu pour victoire */
+        }
 
-       tr:nth-child(even) {
-           background-color: #1a1423;
-       }
-
-       tr:nth-child(odd) {
-           background-color: #100c18;
-       }
-
-       tr:hover {
-           background-color: #29213d;  /* Highlighted row on hover */
-           cursor: pointer;
-           transform: scale(1.02);     /* Slight zoom effect */
-       }
-
-       /* Button styles */
-       button {
-           background-color: #ffd700; /* Gold button */
-           color: #0e0b16;
-           padding: 10px 20px;
-           border: none;
-           border-radius: 5px;
-           cursor: pointer;
-           font-size: 1rem;
-           font-weight: bold;
-           transition: background-color 0.3s ease, transform 0.3s ease;
-       }
-
-       button:hover {
-           background-color: #ffae00; /* Darker gold on hover */
-           transform: scale(1.1);     /* Zoom effect */
-       }
-
-       /* Scrollbar styles */
-       ::-webkit-scrollbar {
-           width: 12px;
-       }
-
-       ::-webkit-scrollbar-track {
-           background: #151026; /* Dark background */
-       }
-
-       ::-webkit-scrollbar-thumb {
-           background-color: #ffd700; /* Gold scrollbar */
-           border-radius: 6px;
-           border: 3px solid #151026; /* Padding between thumb and track */
-       }
-
-       tr:active {
-           background-color: #ffd700;  /* Change le fond en doré lors du clic */
-           color: #0e0b16;             /* Change le texte en noir pour contraste */
-           transform: scale(1.05);     /* Accentue légèrement le zoom */
-       }
-
-   </style>
+        .loss {
+            background-color: #e74c3c; /* Rouge pour défaite */
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -138,19 +72,31 @@
         <thead>
         <tr>
             <th>Name</th>
-            <th>Tagline</th>
             <th>Tier</th>
             <th>Rank</th>
             <th>League Points</th>
             <th>Wins</th>
             <th>Losses</th>
-            <th>Hot Streak</th>
+            <th>Match History</th> <!-- Colonne pour l'historique des matchs -->
         </tr>
         </thead>
         <tbody>
-
         </tbody>
     </table>
+</div>
+
+<!-- Panneau flottant pour les détails des invocateurs -->
+<div class="details-panel" id="details-panel">
+    <span class="close-panel" onclick="closePanel()">✖</span>
+    <h2 id="details-summoner-name"></h2>
+    <p><strong>Tier:</strong> <span id="details-tier"></span></p>
+    <p><strong>Rank:</strong> <span id="details-rank"></span></p>
+    <p><strong>League Points:</strong> <span id="details-lp"></span></p>
+    <p><strong>Wins:</strong> <span id="details-wins"></span></p>
+    <p><strong>Losses:</strong> <span id="details-losses"></span></p>
+    <p><strong>Winrate:</strong> <span id="details-winrate"></span></p> <!-- Winrate -->
+    <h3>Match History (Last 5 games)</h3>
+    <ul id="details-match-history"></ul> <!-- Match history details -->
 </div>
 
 <script>
@@ -159,10 +105,17 @@
         try {
             const response = await fetch('http://localhost:3000/leaderboard');
             const data = await response.json();
+            console.log('Data fetched:', data); // Log fetched data to debug
             populateLeaderboard(data);
         } catch (error) {
             console.error('Error fetching leaderboard data:', error);
         }
+    }
+
+    // Calculate winrate based on total games
+    function calculateWinrate(wins, losses) {
+        const totalGames = wins + losses;
+        return totalGames > 0 ? ((wins / totalGames) * 100).toFixed(2) + '%' : '0%';
     }
 
     // Populate the leaderboard table with data
@@ -175,47 +128,94 @@
 
             // Name
             const nameCell = document.createElement('td');
-            nameCell.textContent = summoner.name;
+            nameCell.textContent = summoner.name || 'Unknown';
+            nameCell.addEventListener('click', () => showSummonerDetails(summoner));
             row.appendChild(nameCell);
-
-            // Tagline
-            const taglineCell = document.createElement('td');
-            taglineCell.textContent = summoner.tagline;
-            row.appendChild(taglineCell);
 
             // Tier
             const tierCell = document.createElement('td');
-            tierCell.textContent = summoner.tier;
+            tierCell.textContent = summoner.tier || 'N/A';
             row.appendChild(tierCell);
 
             // Rank
             const rankCell = document.createElement('td');
-            rankCell.textContent = summoner.rank;
+            rankCell.textContent = summoner.rank || 'N/A';
             row.appendChild(rankCell);
 
             // League Points
             const lpCell = document.createElement('td');
-            lpCell.textContent = summoner.leaguePoints;
+            lpCell.textContent = summoner.leaguePoints || 0;
             row.appendChild(lpCell);
 
             // Wins
             const winsCell = document.createElement('td');
-            winsCell.textContent = summoner.wins;
+            winsCell.textContent = summoner.wins || 0;
             row.appendChild(winsCell);
 
             // Losses
             const lossesCell = document.createElement('td');
-            lossesCell.textContent = summoner.losses;
+            lossesCell.textContent = summoner.losses || 0;
             row.appendChild(lossesCell);
 
-            // Hot Streak
-            const hotStreakCell = document.createElement('td');
-            hotStreakCell.textContent = summoner.hotStreak ? 'Yes' : 'No';
-            row.appendChild(hotStreakCell);
+            // Match History (5 last matches, blue for win, red for loss)
+            const historyCell = document.createElement('td');
+            const historyContainer = document.createElement('div');
+            historyContainer.className = 'match-history';
+
+            summoner.matchHistory.slice(-5).forEach(match => {
+                const matchDiv = document.createElement('div');
+                matchDiv.className = match.win ? 'win' : 'loss'; // Bleu pour victoire, rouge pour défaite
+                historyContainer.appendChild(matchDiv);
+            });
+
+            historyCell.appendChild(historyContainer);
+            row.appendChild(historyCell);
 
             // Append the row to the table body
             tableBody.appendChild(row);
         });
+    }
+
+    // Show summoner details in the floating panel
+    function showSummonerDetails(summoner) {
+        // Set default values if data is missing
+        document.getElementById('details-summoner-name').textContent = summoner.name || 'Unknown';
+        document.getElementById('details-tier').textContent = summoner.tier || 'N/A';
+        document.getElementById('details-rank').textContent = summoner.rank || 'N/A';
+        document.getElementById('details-lp').textContent = summoner.leaguePoints || 0;
+        document.getElementById('details-wins').textContent = summoner.wins || 0;
+        document.getElementById('details-losses').textContent = summoner.losses || 0;
+
+        // Calculate and display winrate based on total games
+        const winrate = calculateWinrate(summoner.wins, summoner.losses);
+        document.getElementById('details-winrate').textContent = winrate;
+
+        // Populate match history
+        const matchHistoryList = document.getElementById('details-match-history');
+        matchHistoryList.innerHTML = '';  // Clear previous data
+
+        if (summoner.matchHistory && summoner.matchHistory.length > 0) {
+            summoner.matchHistory.forEach(match => {
+                const listItem = document.createElement('li');
+                const championName = match.championName || 'Unknown Champion';
+                listItem.textContent = `Champion: ${championName} | Kills: ${match.kills}, Deaths: ${match.deaths}`;
+                listItem.style.color = match.win ? '#3498db' : '#e74c3c';  // Bleu pour victoire, rouge pour défaite
+                matchHistoryList.appendChild(listItem);
+            });
+        } else {
+            // If no match history, show message
+            const listItem = document.createElement('li');
+            listItem.textContent = "No match history available";
+            matchHistoryList.appendChild(listItem);
+        }
+
+        // Show the panel
+        document.getElementById('details-panel').classList.add('active');
+    }
+
+    // Close the details panel
+    function closePanel() {
+        document.getElementById('details-panel').classList.remove('active');
     }
 
     // Fetch leaderboard data when the page loads

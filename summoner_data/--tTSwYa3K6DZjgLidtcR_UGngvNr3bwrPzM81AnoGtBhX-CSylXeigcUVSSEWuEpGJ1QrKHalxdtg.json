@@ -1,0 +1,55 @@
+{
+  "name": "SchlawgCantPay",
+  "tagline": "bills",
+  "puuid": "--tTSwYa3K6DZjgLidtcR_UGngvNr3bwrPzM81AnoGtBhX-CSylXeigcUVSSEWuEpGJ1QrKHalxdtg",
+  "encryptedAccountId": "88YSvy6AnuwEPgIeg8kTcVcJMCTz9OGjQu-kTTY0fAQc8z0xOwUFt37L",
+  "encryptedSummonerId": "3yO-p_v_2DTjXQfBhL2yuFUpKUnXhomGA7zt0bmFANSB-TFZ",
+  "elo": "SILVER I",
+  "matchHistory": [
+    {
+      "matchId": "EUW1_7162778456",
+      "win": false,
+      "kills": 5,
+      "deaths": 6,
+      "championName": "Heimerdinger"
+    },
+    {
+      "matchId": "EUW1_7162732273",
+      "win": true,
+      "kills": 6,
+      "deaths": 2,
+      "championName": "Heimerdinger"
+    },
+    {
+      "matchId": "EUW1_7162680274",
+      "win": true,
+      "kills": 4,
+      "deaths": 8,
+      "championName": "Swain"
+    },
+    {
+      "matchId": "EUW1_7162645973",
+      "win": false,
+      "kills": 4,
+      "deaths": 5,
+      "championName": "Heimerdinger"
+    },
+    {
+      "matchId": "EUW1_7162616263",
+      "win": false,
+      "kills": 0,
+      "deaths": 3,
+      "championName": "Nami"
+    }
+  ],
+  "leagueId": "3d771642-bf79-4d64-a994-16e910694a7d",
+  "queueType": "RANKED_SOLO_5x5",
+  "tier": "SILVER",
+  "rank": "II",
+  "leaguePoints": 74,
+  "wins": 25,
+  "losses": 29,
+  "hotStreak": false,
+  "winrate": "40.00%",
+  "summonerId": "3yO-p_v_2DTjXQfBhL2yuFUpKUnXhomGA7zt0bmFANSB-TFZ"
+}
