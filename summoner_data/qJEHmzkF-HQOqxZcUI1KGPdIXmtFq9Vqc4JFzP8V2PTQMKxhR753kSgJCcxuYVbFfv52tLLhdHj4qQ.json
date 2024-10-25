@@ -7,6 +7,13 @@
   "elo": "Unranked",
   "matchHistory": [
     {
+      "matchId": "EUW1_7163850394",
+      "win": false,
+      "kills": 6,
+      "deaths": 4,
+      "championName": "Chogath"
+    },
+    {
       "matchId": "EUW1_7163124523",
       "win": false,
       "kills": 1,
@@ -32,13 +39,6 @@
       "win": true,
       "kills": 11,
       "deaths": 9,
-      "championName": "Caitlyn"
-    },
-    {
-      "matchId": "EUW1_7162887725",
-      "win": false,
-      "kills": 6,
-      "deaths": 11,
       "championName": "Caitlyn"
     }
   ],

@@ -7,6 +7,20 @@
   "elo": "Unranked",
   "matchHistory": [
     {
+      "matchId": "EUW1_7163790197",
+      "win": false,
+      "kills": 8,
+      "deaths": 6,
+      "championName": "Mordekaiser"
+    },
+    {
+      "matchId": "EUW1_7163778267",
+      "win": false,
+      "kills": 0,
+      "deaths": 0,
+      "championName": "Fiora"
+    },
+    {
       "matchId": "EUW1_7162146578",
       "win": false,
       "kills": 23,
@@ -26,21 +40,16 @@
       "kills": 3,
       "deaths": 8,
       "championName": "Varus"
-    },
-    {
-      "matchId": "EUW1_7158643225",
-      "win": false,
-      "kills": 3,
-      "deaths": 8,
-      "championName": "Varus"
-    },
-    {
-      "matchId": "EUW1_7158561981",
-      "win": false,
-      "kills": 6,
-      "deaths": 4,
-      "championName": "Jinx"
     }
   ],
-  "winrate": "20.00%"
+  "winrate": "20.00%",
+  "leagueId": "507a5bf3-f89d-491c-ae93-40493c89af05",
+  "summonerId": "WbStHmfmjIxHU2E7kpFAzckW0Yjutt7c2srV79vDEYcVne0t",
+  "queueType": "RANKED_SOLO_5x5",
+  "tier": "GOLD",
+  "rank": "IV",
+  "leaguePoints": 0,
+  "wins": 0,
+  "losses": 5,
+  "hotStreak": false
 }

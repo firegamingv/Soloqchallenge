@@ -5,65 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leaderboard</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Styles pour le panneau flottant */
-        .details-panel {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            width: 300px;
-            padding: 20px;
-            background-color: #1f1b2e;
-            color: white;
-            border: 2px solid #ffd700;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-            display: none;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        .details-panel h2 {
-            margin-top: 0;
-            color: #ffd700;
-        }
-
-        .details-panel p {
-            margin: 10px 0;
-        }
-
-        .close-panel {
-            cursor: pointer;
-            color: #ffd700;
-            float: right;
-            font-size: 1.5rem;
-        }
-
-        .details-panel.active {
-            display: block;
-        }
-
-        /* Styles pour les carrés de victoire et de défaite */
-        .match-history {
-            display: flex;
-            justify-content: center;
-        }
-
-        .match-history div {
-            width: 20px;
-            height: 20px;
-            margin: 0 3px;
-            border-radius: 3px;
-        }
-
-        .win {
-            background-color: #3498db; /* Bleu pour victoire */
-        }
-
-        .loss {
-            background-color: #e74c3c; /* Rouge pour défaite */
-        }
-    </style>
 </head>
 <body>
 <div class="container">
@@ -77,15 +18,39 @@
             <th>League Points</th>
             <th>Wins</th>
             <th>Losses</th>
-            <th>Match History</th> <!-- Colonne pour l'historique des matchs -->
+            <th>Winrate</th>
+            <th>Points</th>
+            <th>Match History</th>
         </tr>
         </thead>
         <tbody>
         </tbody>
     </table>
+    <div class="error-message" id="error-message" style="display: none;">No players found or error loading data.</div>
 </div>
 
-<!-- Panneau flottant pour les détails des invocateurs -->
+<div class="container">
+    <h2>Team Points</h2>
+    <table id="team-points-table">
+        <thead>
+        <tr>
+            <th>Team</th>
+            <th>Total Points</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Axel</td>
+            <td id="team-axel-points">0</td>
+        </tr>
+        <tr>
+            <td>Jarrai</td>
+            <td id="team-jarrai-points">0</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 <div class="details-panel" id="details-panel">
     <span class="close-panel" onclick="closePanel()">✖</span>
     <h2 id="details-summoner-name"></h2>
@@ -94,91 +59,126 @@
     <p><strong>League Points:</strong> <span id="details-lp"></span></p>
     <p><strong>Wins:</strong> <span id="details-wins"></span></p>
     <p><strong>Losses:</strong> <span id="details-losses"></span></p>
-    <p><strong>Winrate:</strong> <span id="details-winrate"></span></p> <!-- Winrate -->
+    <p><strong>Winrate:</strong> <span id="details-winrate"></span></p>
+    <p><strong>Points:</strong> <span id="details-points"></span></p>
     <h3>Match History (Last 5 games)</h3>
-    <ul id="details-match-history"></ul> <!-- Match history details -->
+    <ul id="details-match-history"></ul>
 </div>
 
 <script>
-    // Fetch leaderboard data from the API
-    async function fetchLeaderboard() {
-        try {
-            const response = await fetch('http://localhost:3000/leaderboard');
-            const data = await response.json();
-            console.log('Data fetched:', data); // Log fetched data to debug
-            populateLeaderboard(data);
-        } catch (error) {
-            console.error('Error fetching leaderboard data:', error);
-        }
+    const teamAxel = ["CRISMONNOM", "coward swallower", "KC YasNeko", "the ruined one", "0lope", "zak"];
+    const teamJarrai = ["Artifroa", "yla", "Tom Sawyerr", "TheBillCollector", "zLaww", "SchlawgCantPay"];
+
+    const tierHierarchy = { 'IRON': 0, 'BRONZE': 400, 'SILVER': 800, 'GOLD': 1200, 'PLATINUM': 1600, 'EMERALD': 2000, 'DIAMOND': 2400, 'MASTER': 2800, 'GRANDMASTER': 3200, 'CHALLENGER': 3600 };
+    const rankValue = { 'IV': 0, 'III': 100, 'II': 200, 'I': 300 };
+
+    function calculateTotalPoints(tier, rank, lp) {
+        const tierPoints = tierHierarchy[tier.toUpperCase()] || 0;
+        const rankPoints = rankValue[rank.toUpperCase()] || 0;
+        return tierPoints + rankPoints + lp;
     }
 
-    // Calculate winrate based on total games
     function calculateWinrate(wins, losses) {
         const totalGames = wins + losses;
         return totalGames > 0 ? ((wins / totalGames) * 100).toFixed(2) + '%' : '0%';
     }
 
-    // Populate the leaderboard table with data
+    async function fetchLeaderboard() {
+        try {
+            const response = await fetch('http://localhost:3000/leaderboard');
+            if (!response.ok) throw new Error("Network response was not ok");
+
+            const data = await response.json();
+
+            if (data && data.length > 0) {
+                document.getElementById('error-message').style.display = 'none';
+                populateLeaderboard(data);
+                calculateTeamPoints(data);
+            } else {
+                document.getElementById('error-message').style.display = 'block';
+            }
+        } catch (error) {
+            console.error('Error fetching leaderboard data:', error);
+            document.getElementById('error-message').style.display = 'block';
+        }
+    }
+
     function populateLeaderboard(summoners) {
         const tableBody = document.querySelector('#leaderboard-table tbody');
-        tableBody.innerHTML = ''; // Clear any existing data
+        tableBody.innerHTML = '';
 
         summoners.forEach(summoner => {
             const row = document.createElement('tr');
 
-            // Name
             const nameCell = document.createElement('td');
             nameCell.textContent = summoner.name || 'Unknown';
             nameCell.addEventListener('click', () => showSummonerDetails(summoner));
             row.appendChild(nameCell);
 
-            // Tier
             const tierCell = document.createElement('td');
             tierCell.textContent = summoner.tier || 'N/A';
             row.appendChild(tierCell);
 
-            // Rank
             const rankCell = document.createElement('td');
             rankCell.textContent = summoner.rank || 'N/A';
             row.appendChild(rankCell);
 
-            // League Points
             const lpCell = document.createElement('td');
             lpCell.textContent = summoner.leaguePoints || 0;
             row.appendChild(lpCell);
 
-            // Wins
             const winsCell = document.createElement('td');
             winsCell.textContent = summoner.wins || 0;
             row.appendChild(winsCell);
 
-            // Losses
             const lossesCell = document.createElement('td');
             lossesCell.textContent = summoner.losses || 0;
             row.appendChild(lossesCell);
 
-            // Match History (5 last matches, blue for win, red for loss)
+            const winrateCell = document.createElement('td');
+            winrateCell.textContent = calculateWinrate(summoner.wins, summoner.losses);
+            row.appendChild(winrateCell);
+
+            const pointsCell = document.createElement('td');
+            const totalPoints = calculateTotalPoints(summoner.tier, summoner.rank, summoner.leaguePoints);
+            pointsCell.textContent = totalPoints;
+            row.appendChild(pointsCell);
+
             const historyCell = document.createElement('td');
             const historyContainer = document.createElement('div');
             historyContainer.className = 'match-history';
 
             summoner.matchHistory.slice(-5).forEach(match => {
                 const matchDiv = document.createElement('div');
-                matchDiv.className = match.win ? 'win' : 'loss'; // Bleu pour victoire, rouge pour défaite
+                matchDiv.className = match.win ? 'win' : 'loss';
                 historyContainer.appendChild(matchDiv);
             });
 
             historyCell.appendChild(historyContainer);
             row.appendChild(historyCell);
 
-            // Append the row to the table body
             tableBody.appendChild(row);
         });
     }
 
-    // Show summoner details in the floating panel
+    function calculateTeamPoints(summoners) {
+        let axelPoints = 0;
+        let jarraiPoints = 0;
+
+        summoners.forEach(summoner => {
+            const totalPoints = calculateTotalPoints(summoner.tier, summoner.rank, summoner.leaguePoints);
+            if (teamAxel.includes(summoner.name)) {
+                axelPoints += totalPoints;
+            } else if (teamJarrai.includes(summoner.name)) {
+                jarraiPoints += totalPoints;
+            }
+        });
+
+        document.getElementById('team-axel-points').textContent = axelPoints;
+        document.getElementById('team-jarrai-points').textContent = jarraiPoints;
+    }
+
     function showSummonerDetails(summoner) {
-        // Set default values if data is missing
         document.getElementById('details-summoner-name').textContent = summoner.name || 'Unknown';
         document.getElementById('details-tier').textContent = summoner.tier || 'N/A';
         document.getElementById('details-rank').textContent = summoner.rank || 'N/A';
@@ -186,39 +186,28 @@
         document.getElementById('details-wins').textContent = summoner.wins || 0;
         document.getElementById('details-losses').textContent = summoner.losses || 0;
 
-        // Calculate and display winrate based on total games
         const winrate = calculateWinrate(summoner.wins, summoner.losses);
         document.getElementById('details-winrate').textContent = winrate;
+        const totalPoints = calculateTotalPoints(summoner.tier, summoner.rank, summoner.leaguePoints);
+        document.getElementById('details-points').textContent = totalPoints;
 
-        // Populate match history
         const matchHistoryList = document.getElementById('details-match-history');
-        matchHistoryList.innerHTML = '';  // Clear previous data
-
-        if (summoner.matchHistory && summoner.matchHistory.length > 0) {
-            summoner.matchHistory.forEach(match => {
-                const listItem = document.createElement('li');
-                const championName = match.championName || 'Unknown Champion';
-                listItem.textContent = `Champion: ${championName} | Kills: ${match.kills}, Deaths: ${match.deaths}`;
-                listItem.style.color = match.win ? '#3498db' : '#e74c3c';  // Bleu pour victoire, rouge pour défaite
-                matchHistoryList.appendChild(listItem);
-            });
-        } else {
-            // If no match history, show message
+        matchHistoryList.innerHTML = '';
+        summoner.matchHistory.forEach(match => {
             const listItem = document.createElement('li');
-            listItem.textContent = "No match history available";
+            const championName = match.championName || 'Unknown Champion';
+            listItem.textContent = `Champion: ${championName} | Kills: ${match.kills}, Deaths: ${match.deaths}`;
+            listItem.style.color = match.win ? '#3498db' : '#e74c3c';
             matchHistoryList.appendChild(listItem);
-        }
+        });
 
-        // Show the panel
         document.getElementById('details-panel').classList.add('active');
     }
 
-    // Close the details panel
     function closePanel() {
         document.getElementById('details-panel').classList.remove('active');
     }
 
-    // Fetch leaderboard data when the page loads
     window.onload = fetchLeaderboard;
 </script>
 </body>

@@ -7,6 +7,13 @@
   "elo": "SILVER IV",
   "matchHistory": [
     {
+      "matchId": "EUW1_7163154333",
+      "win": false,
+      "kills": 6,
+      "deaths": 13,
+      "championName": "Azir"
+    },
+    {
       "matchId": "EUW1_7163121013",
       "win": false,
       "kills": 0,
@@ -33,13 +40,6 @@
       "kills": 3,
       "deaths": 10,
       "championName": "Taliyah"
-    },
-    {
-      "matchId": "EUW1_7158561981",
-      "win": false,
-      "kills": 4,
-      "deaths": 6,
-      "championName": "Cassiopeia"
     }
   ],
   "leagueId": "e5a2a922-072e-4004-b367-b84d33b570d7",
@@ -48,7 +48,7 @@
   "rank": "IV",
   "leaguePoints": 0,
   "wins": 21,
-  "losses": 28,
+  "losses": 29,
   "hotStreak": false,
   "winrate": "20.00%",
   "summonerId": "OL-mEnsQ6t3PE6CnYHApm0n_QNpjQ9uXp0yWVmTlbhNod6EPHNpSUjMt2g"

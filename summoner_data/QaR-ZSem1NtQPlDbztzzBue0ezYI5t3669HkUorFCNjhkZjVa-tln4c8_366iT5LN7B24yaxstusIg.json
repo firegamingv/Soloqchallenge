@@ -7,39 +7,39 @@
   "elo": "SILVER II",
   "matchHistory": [
     {
-      "matchId": "EUW1_7163110639",
+      "matchId": "EUW1_7163852476",
       "win": true,
-      "kills": 8,
-      "deaths": 0,
-      "championName": "Kayn"
+      "kills": 22,
+      "deaths": 14,
+      "championName": "Fizz"
     },
     {
-      "matchId": "EUW1_7162884871",
+      "matchId": "EUW1_7163819542",
       "win": false,
-      "kills": 2,
-      "deaths": 9,
+      "kills": 14,
+      "deaths": 15,
+      "championName": "Samira"
+    },
+    {
+      "matchId": "EUW1_7163783752",
+      "win": false,
+      "kills": 3,
+      "deaths": 5,
       "championName": "Yone"
     },
     {
-      "matchId": "EUW1_7162792022",
-      "win": false,
-      "kills": 6,
-      "deaths": 15,
-      "championName": "Katarina"
+      "matchId": "EUW1_7163714059",
+      "win": true,
+      "kills": 16,
+      "deaths": 8,
+      "championName": "Ekko"
     },
     {
-      "matchId": "EUW1_7161646655",
+      "matchId": "EUW1_7163678611",
       "win": false,
-      "kills": 0,
-      "deaths": 10,
-      "championName": "Nautilus"
-    },
-    {
-      "matchId": "EUW1_7160304454",
-      "win": false,
-      "kills": 6,
+      "kills": 7,
       "deaths": 9,
-      "championName": "Neeko"
+      "championName": "Briar"
     }
   ],
   "leagueId": "e7fc8fd9-05d1-4d9e-af60-c8e39886cd44",
@@ -50,6 +50,6 @@
   "wins": 16,
   "losses": 14,
   "hotStreak": false,
-  "winrate": "20.00%",
+  "winrate": "40.00%",
   "summonerId": "hzZD_bU_1QLr5N5WGVguDGwas5Gwsu8JPYp9xAPvm-Rp3HlZzCrtI3U1pQ"
 }

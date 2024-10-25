@@ -13,15 +13,15 @@ const REGION = 'euw1';  // Utilisé pour la ligue, etc.
 const MATCH_REGION = 'europe';  // Utilisé pour l'API des matchs
 
 
-// MongoDB connection
+
 mongoose.connect('mongodb://localhost:27017/leaderboard')
     .then(() => console.log('MongoDB connected...'))
     .catch(err => console.error('MongoDB connection error:', err));
 
-// Serve static files from the "public" directory
+
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Summoner schema (optional if you're also saving to MongoDB)
+
 const Summoner = mongoose.model('Summoner', new mongoose.Schema({
     name: { type: String, required: true },
     tagline: { type: String, required: true },
@@ -40,51 +40,51 @@ const Summoner = mongoose.model('Summoner', new mongoose.Schema({
     matchHistory: { type: [Object] }
 }));
 
-// Directory where summoner data is stored
+
 const summonerDataDir = path.join(__dirname, 'summoner_data');
 
-// Load summoner data from summoners.json
+
 function loadSummonerDataFromJson() {
     const summonerJsonPath = path.join(__dirname, 'summoners.json');
     if (fs.existsSync(summonerJsonPath)) {
         const data = fs.readFileSync(summonerJsonPath, 'utf8');
-        return JSON.parse(data);  // Return parsed summoners
+        return JSON.parse(data);
     } else {
         console.error('summoners.json not found.');
         return [];
     }
 }
 
-// Get file path for a specific player's data based on puuid
+
 function getSummonerFilePath(puuid) {
     return path.join(summonerDataDir, `${puuid}.json`);
 }
 
-// Load a summoner's detailed data from their file
+
 function loadSummonerFile(puuid) {
     const filePath = getSummonerFilePath(puuid);
     if (fs.existsSync(filePath)) {
         const data = fs.readFileSync(filePath, 'utf8');
-        return JSON.parse(data);  // Return parsed summoner data
+        return JSON.parse(data);
     }
     return null;
 }
 
-// Save a summoner's data to their file
+
 function saveSummonerFile(puuid, data) {
     const filePath = getSummonerFilePath(puuid);
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
     console.log(`Data for ${puuid} saved to ${filePath}`);
 }
-// Function to add a delay between requests
+
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// Fetch detailed ELO data for a summoner
+
 async function fetchElo(encryptedSummonerId) {
     try {
-        await delay(50);  // Delay to avoid exceeding rate limits (20 requests/second)
+        await delay(50);
         const response = await axios.get(`https://${REGION}.api.riotgames.com/lol/league/v4/entries/by-summoner/${encryptedSummonerId}?api_key=${process.env.RIOT_API_KEY}`);
         const rankedData = response.data.find(entry => entry.queueType === 'RANKED_SOLO_5x5');
         if (rankedData) {
@@ -107,26 +107,26 @@ async function fetchElo(encryptedSummonerId) {
     }
 }
 
-// Fetch match history for a summoner using the PUUID
+
 async function fetchMatchHistory(puuid) {
     try {
-        await delay(50);  // Delay to avoid exceeding rate limits
+        await delay(50);
         const response = await axios.get(`https://${MATCH_REGION}.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=5&api_key=${process.env.RIOT_API_KEY}`);
-        return response.data;  // Returns array of match IDs
+        return response.data;
     } catch (error) {
         console.error(`Error fetching match history for summoner ${puuid}: ${error.message}`, error.response?.data);
         return [];
     }
 }
 
-// Fetch detailed match data for each match ID, including kills, deaths, and champion
+
 async function fetchMatchDetails(matchId, puuid) {
     try {
-        await delay(50);  // Delay to avoid exceeding rate limits
+        await delay(50);
         const response = await axios.get(`https://${MATCH_REGION}.api.riotgames.com/lol/match/v5/matches/${matchId}?api_key=${process.env.RIOT_API_KEY}`);
         const matchData = response.data;
 
-        // Find the summoner's performance in the match using the puuid
+
         const participant = matchData.info.participants.find(p => p.puuid === puuid);
 
         if (participant) {
@@ -135,7 +135,7 @@ async function fetchMatchDetails(matchId, puuid) {
                 win: participant.win,
                 kills: participant.kills,
                 deaths: participant.deaths,
-                championName: participant.championName  // Champion played in the match
+                championName: participant.championName
             };
         }
 
@@ -146,20 +146,20 @@ async function fetchMatchDetails(matchId, puuid) {
     }
 }
 
-// Update ELO, match history, and calculate winrate for all summoners
+
 async function updateSummonersData() {
-    const summoners = loadSummonerDataFromJson();  // Load summoner data from summoners.json
+    const summoners = loadSummonerDataFromJson();
 
     try {
         for (const summoner of summoners) {
             console.log(`Updating data for summoner: ${summoner.name}, PUUID: ${summoner.puuid}`);
 
-            // Fetch match history and filter new matches
+
             const newMatchIds = await fetchMatchHistory(summoner.puuid);
             const existingMatchIds = summoner.matchHistory ? summoner.matchHistory.map(match => match.matchId) : [];
             const newMatchIdsToFetch = newMatchIds.filter(matchId => !existingMatchIds.includes(matchId));
 
-            // Fetch detailed match data for new match IDs with rate limiting
+
             const detailedMatchHistory = [];
             let winCount = 0;
             let matchCount = 0;
@@ -173,21 +173,21 @@ async function updateSummonersData() {
                 }
             }
 
-            // Combine new matches with the existing match history, and keep only the last 5 matches
+
             summoner.matchHistory = [...detailedMatchHistory, ...(summoner.matchHistory || [])].slice(0, 5);
 
-            // Calculate winrate based on last 5 matches
+
             const totalMatches = summoner.matchHistory.length;
             const totalWins = summoner.matchHistory.filter(match => match.win).length;
             summoner.winrate = totalMatches ? ((totalWins / totalMatches) * 100).toFixed(2) + '%' : '0%';
 
-            // Fetch and update ELO after updating match history
+
             const eloData = await fetchElo(summoner.encryptedSummonerId);
             if (eloData) {
                 Object.assign(summoner, eloData);
             }
 
-            // Save the updated summoner data to their file
+
             console.log(`Saving data for summoner: ${summoner.name}, PUUID: ${summoner.puuid}`);
             saveSummonerFile(summoner.puuid, summoner);
         }
@@ -201,7 +201,7 @@ async function updateSummonersData() {
 // Leaderboard route
 app.get('/leaderboard', async (req, res) => {
     try {
-        // Load all summoner files from the summoner_data directory
+
         const summonerFiles = fs.readdirSync(summonerDataDir);
         const summoners = summonerFiles.map(file => {
             const puuid = path.basename(file, '.json');
@@ -214,7 +214,7 @@ app.get('/leaderboard', async (req, res) => {
     }
 });
 
-// Update data every minute using cron job
+
 cron.schedule('* * * * *', () => {
     console.log('Updating summoner data...');
     updateSummonersData();

@@ -7,13 +7,6 @@
   "elo": "SILVER IV",
   "matchHistory": [
     {
-      "matchId": "EUW1_7161159936",
-      "win": false,
-      "kills": 5,
-      "deaths": 5,
-      "championName": "Darius"
-    },
-    {
       "matchId": "EUW1_7160836862",
       "win": false,
       "kills": 6,

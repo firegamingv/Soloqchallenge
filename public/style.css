@@ -123,3 +123,37 @@ tr:hover {
     float: right;
     cursor: pointer;
 }
+.details-panel {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    width: 300px;
+    padding: 20px;
+    background-color: #1f1b2e;
+    color: white;
+    border: 2px solid #ffd700;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    display: none;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.details-panel h2 { color: #ffd700; }
+
+.details-panel p { margin: 10px 0; }
+
+.close-panel { cursor: pointer; color: #ffd700; float: right; font-size: 1.5rem; }
+.details-panel.active { display: block; }
+.match-history {
+    display: flex;
+    justify-content: center;
+}
+.match-history div {
+    width: 20px;
+    height: 20px;
+    margin: 0 3px;
+    border-radius: 3px;
+}
+.win { background-color: #3498db; }
+.loss { background-color: #e74c3c; }
